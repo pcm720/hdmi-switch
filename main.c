@@ -22,7 +22,7 @@ HDMI Switcher code for ATmega88PA
 #include "switch.h"
 #include "eeprom.h"
 
-volatile uint8_t selectedInput;
+volatile uint8_t selectedInput = 0x0;
 volatile uint8_t timer = 11;
 
 void init(void);
@@ -38,6 +38,8 @@ int main(void) {
         outputState = 0x0;                 // reading failed, revert to default parameters
         eeprom_write(outputState);         // try to save defaults
     }
+    selectedInput = outputState;
+    outputState = 0x0;
 
     init();
 
@@ -85,7 +87,7 @@ void init(void) {
     PORTC = 0x0;
     DDRD = 0x0;  // set PD to input
     PORTD = 0x0; // disable pull-ups
-    PRR = 0xEB;  // power reduction
+    PRR = 0xE7;  // power reduction
 
     PCMSK2 = 0x3F;          // prepare interrupts for every input pin
     PCICR = 0x4;            // enable PCINT for PORTD
@@ -97,6 +99,15 @@ void init(void) {
 }
 
 void mcu_sleep(void) {
+    PORTB |= 0xC3; // blink all LEDs
+    _delay_ms(1000);
+    PORTB &= ~0xC3;
+    _delay_ms(100);
+    PORTB |= 0xC3;
+    _delay_ms(100);
+    PORTB &= ~0xC3; // disable LEDs
+    _delay_ms(100);
+    
     set_sleep_mode(SLEEP_MODE_PWR_DOWN);
     cli();
     sleep_enable();

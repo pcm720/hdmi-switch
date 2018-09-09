@@ -25,13 +25,13 @@ void switch_off(void) {
     _delay_ms(10);
     PORTC &= ~SW3_OE;       // disable SW3_OE
     _delay_ms(10);
+    PORTC &= ~Dx_SEL_MASK; // clear Dx_SEL on all switches
 }
 
 void switch_input(uint8_t portConfig, uint8_t coldStart) {
     ATOMIC_BLOCK(ATOMIC_RESTORESTATE) {
         if (coldStart == 0) switch_off();
-        if (portConfig == OFF) PORTC &= ~Dx_SEL_MASK; // clear Dx_SEL on all switches
-        else {
+        if (portConfig != OFF) {
             PORTC |= (portConfig & Dx_SEL_MASK);      // set Dx_SEL on all switches
             _delay_ms(500);
             PORTC |= (portConfig & SW1_SW2_OE);       // enable SWn_OE
