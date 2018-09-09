@@ -1,0 +1,40 @@
+Reference				|	Value		|	Size		|	Count
+
+Buttons:
+B1-B5					|	1243SHIM					|	5
+
+Diodes:
+D1						|	BAT54		|	SOT-23		|	1
+D2-D6					|	KP-2012SGD					|	5
+
+Fuses:
+F1						|	MF-MSMF050-2				|	1
+
+HDMI Sockets:
+HDMI1-HDMI4				|	DS1114-BN0					|	4
+HDMI5					|	LOTES, Model # Unknown		|	1
+
+Headers:
+ISP1					|	IDC-06MS/2.54 pin header	|	1
+
+USB Sockets:
+J1						|	Molex_47346-0001			|	1
+
+Resistors:
+R1-R4, R18				|	1M			|	0805		|	5
+R5-R8					|	100k		|	0805		|	4
+R10-R11					|	47k			|	0805		|	2
+R14-R17, R19-R21, R27	|	10k			|	0805		|	8
+R22-R25					|	200			|	0805		|	4
+R26						|	1k			|	0805		|	1
+
+
+ICs:
+U1-U3					|	HD3SS215RTQT				| 3
+U4						|	ATMEGA88PA-AU
+U5						|	AMS1117-3.3
+
+Capacitors:
+С1-C10, C12				|	0.1 uF		|	0805		|	11
+С11, C13, C15, C17		|	100 nF		|	0603		|	4
+С14, C16				|	47 uF 10V	|	Tantalum B	|	2
