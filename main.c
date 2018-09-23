@@ -82,14 +82,15 @@ int main(void) {
 }
 
 void init(void) {
+    PORTB = 0x3C; // enable pull-ups on unused pins
+    PORTC = 0xC0;
+    PORTD = 0xE0;
     DDRB = 0xC3; // enable LEDs
     DDRC = 0x3F; // initialize switch control pins as outputs
-    PORTC = 0x0;
     DDRD = 0x0;  // set PD to input
-    PORTD = 0x0; // disable pull-ups
     PRR = 0xE7;  // power reduction
 
-    PCMSK2 = 0x3F;          // prepare interrupts for every input pin
+    PCMSK2 = 0x1F;          // prepare interrupts for every input pin
     PCICR = 0x4;            // enable PCINT for PORTD
     TCCR1B |= (1 << WGM12); // setting up Timer/Counter1 to cause Compare Match A interrupt every second
     TIMSK1 |= (1 << OCIE1A);
